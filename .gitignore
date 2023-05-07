@@ -1,4 +1,7 @@
 .idea/
+.env
+example.env
+
 ### Django ###
 *.log
 *.pot
@@ -37,7 +40,5 @@ wheels/
 .venv
 venv/
 
-.env
-example.env
 
 
