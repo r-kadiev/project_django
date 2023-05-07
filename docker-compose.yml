@@ -1,0 +1,24 @@
+services:
+  project:
+    build:
+      context: docker/project/
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./code:/code
+    env_file:
+      - ./.env.dev
+      - ./default.env
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - db_postgres
+
+  db_postgres:
+    image: postgres:14.6-alpine
+    env_file:
+      - ./default.env
+    volumes:
+      - ./docker/postgres/postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
