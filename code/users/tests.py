@@ -1,3 +1,24 @@
-from django.test import TestCase
+from rest_framework import status
+from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
-# Create your tests here.
+from users.models import CustomUser
+
+
+class CustomUserTestApi(APITestCase):
+
+    def setUp(self):
+        self.superuser = CustomUser.objects.create_superuser(username='superuser', email='super_user@gmail.com',
+                                                             password='superuser123')
+        self.superuser_token = Token.objects.create(user=self.superuser).key
+        self.superuser.save()
+
+        self.user = CustomUser.objects.create_user(username='user', email='test_api@test_api.py', password='TestApi1234')
+        self.user_token = Token.objects.create(user=self.user).key
+        self.user.save()
+
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.user_token}')
+
+    def test_api(self):
+        r = self.client.get('/users/')
+        self.assertEqual(r.status_code, status.HTTP_200_OK)
