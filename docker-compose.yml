@@ -2,17 +2,22 @@ services:
   project:
     build:
       context: docker/project/
+    container_name:
+      "project"
     volumes:
       - ./code:/code
     env_file:
       - .env
-    command: python /code/manage.py runserver 0.0.0.0:8000
 
+    command: >
+      /bin/sh -c "python3 /code/manage.py migrate &&
+                  python3 /code/manage.py makemigrations && 
+                  python3 /code/manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
-
     depends_on:
       - db_postgres
+
 
   db_postgres:
     image: postgres:14.6-alpine
