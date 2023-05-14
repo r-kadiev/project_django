@@ -8,10 +8,7 @@ from users.models import CustomUser
 class CustomUserTestApi(APITestCase):
 
     def setUp(self):
-        self.superuser = CustomUser.objects.create_superuser(username='superuser', email='super_user@gmail.com',
-                                                             password='superuser123')
-        self.superuser_token = Token.objects.create(user=self.superuser).key
-        self.superuser.save()
+
 
         self.user = CustomUser.objects.create_user(username='user', email='test_api@test_api.py', password='TestApi1234')
         self.user_token = Token.objects.create(user=self.user).key
