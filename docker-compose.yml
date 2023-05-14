@@ -8,7 +8,6 @@ services:
       - ./code:/code
     env_file:
       - .env
-      - example.env
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
     depends_on:
@@ -17,7 +16,7 @@ services:
   db_postgres:
     image: postgres:14.6-alpine
     env_file:
-      - example.env
+      - .env
     volumes:
       - ./docker/postgres/postgres_data:/var/lib/postgresql/data/
     ports:
