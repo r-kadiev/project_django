@@ -1,6 +1,4 @@
 .idea/
-.env
-example.env
 
 ### Django ###
 *.log
