@@ -5,8 +5,6 @@ from users.models import SiteRegion, Site, Region
 from .serializers import SiteRegionSerializer, SiteSerializer, RegionSerializer
 
 
-
-
 class Users(APIView):
     permission_classes = (IsAuthenticated,)
 
@@ -15,7 +13,7 @@ class Users(APIView):
             "id": request.user.id,
             "username": request.user.username,
             "email": request.user.email,
-            }
+        }
         return Response(data)
 
 
@@ -31,7 +29,6 @@ class SiteRegionView(APIView):
                 site_data[region] = serializer.data
             response_data[site] = site_data
         return Response(response_data)
-
 
     def get(self, request):
         response = {}

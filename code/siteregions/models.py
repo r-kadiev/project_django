@@ -1,10 +1,12 @@
 from django.db import models
 
+
 class Site(models.Model):
     domain = models.CharField(max_length=255)
 
     def __str__(self):
         return self.domain
+
 
 class Region(models.Model):
     name = models.CharField(max_length=255)
@@ -27,5 +29,3 @@ class SiteRegion(models.Model):
     type = models.CharField(max_length=20, choices=TYPE_CHOICES)
     key = models.CharField(max_length=100)
     value = models.CharField(max_length=100)
-
-
