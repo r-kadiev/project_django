@@ -6,9 +6,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /code
 
 COPY requirements.txt /temp/requirements.txt
-COPY . /code
-
 RUN python -m pip install --upgrade pip
-RUN pip install -r requirements.txt
-
+RUN pip install --no-cache-dir -r /temp/requirements.txt
 COPY . /code/
+CMD python manage.py migrate && python manage.py runserver 0.0.0.0:8000
