@@ -11,5 +11,5 @@ class Users(APIView):
             "id": request.user.id,
             "username": request.user.username,
             "email": request.user.email,
-            }
+        }
         return Response(data)
