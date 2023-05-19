@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from users.models import SiteRegion, Site, Region
+from .models import SiteRegion, Site, Region
 from .serializers import SiteRegionSerializer, SiteSerializer, RegionSerializer
 
 
@@ -17,7 +17,7 @@ class Users(APIView):
         return Response(data)
 
 
-class SiteRegionView(APIView):
+class SiteRegionAPIView(APIView):
     def post(self, request):
         data = request.data
         response_data = {}
